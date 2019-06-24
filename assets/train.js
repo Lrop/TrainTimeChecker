@@ -10,3 +10,12 @@
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
+
+
+  // trainData = firebase.database();
+
+  $("#add-train-btn").on("click", function(event) {
+    // Prevent the default form submit behavior
+    event.preventDefault();
+  });
+  
