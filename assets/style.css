@@ -32,7 +32,6 @@ body {
     border-color: black;
     background-color: black;
     color: white;
-    
 }
 .card-header {
     border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;
@@ -58,6 +57,4 @@ body {
     background-color: black;
     border-color: black;
 }
-#titleHeader {
 
-}
