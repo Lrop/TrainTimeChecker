@@ -1,4 +1,3 @@
- // Your web app's Firebase configuration
  var firebaseConfig = {
     apiKey: "AIzaSyCUAOsFYIHtxoQfgOls8cx-vXps-4kdh6U",
     authDomain: "train-time-database.firebaseapp.com",
