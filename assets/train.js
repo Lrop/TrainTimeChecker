@@ -17,7 +17,7 @@ var firebaseConfig = {
         event.preventDefault();
 
 
-
+        
         var trainName = $("#train-name")
             .val()
             .trim();
@@ -56,3 +56,14 @@ var firebaseConfig = {
 
   });
 
+trainData.ref().on("child_added", function (childSnapshot, prevChildKey){
+    console.log(childSnapshot.val());
+
+
+    var tName = childSnapshot.val().name;
+    var tDestination = childSnapshot.val().destination;
+    var tFrequency = childSnapshot.val().frequency;
+    var tfirstTrain = childSnapshot.val().firstTrain;
+
+
+});
