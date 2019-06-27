@@ -18,16 +18,16 @@ var firebaseConfig = {
 
 
         
-        var trainName = $("#train-name")
+        var trainName = $("#train-name-input")
             .val()
             .trim();
-        var destination = $("#destination")
+        var destination = $("#train-destination-input")
             .val()
             .trim();
-        var firstTrain = $("#train-time")
+        var firstTrain = $("#train-time-input")
             .val()
             .trim();
-        var frequency = $("#frequency")
+        var frequency = $("#train-frequency-input")
             .val()
             .trim();
 
@@ -49,10 +49,10 @@ var firebaseConfig = {
 
         alert("trian added bitch");
 
-        $('#train-name').val("");
-        $('#destination').val("");
-        $('#firstTrain').val("");
-        $('#frequency').val("");
+        $('#train-name-input').val("");
+        $('#train-destination-input').val("");
+        $('#train-time-input').val("");
+        $('#train-frequency-input').val("");
 
   });
 
@@ -63,7 +63,40 @@ trainData.ref().on("child_added", function (childSnapshot, prevChildKey){
     var tName = childSnapshot.val().name;
     var tDestination = childSnapshot.val().destination;
     var tFrequency = childSnapshot.val().frequency;
-    var tfirstTrain = childSnapshot.val().firstTrain;
+    var tFirstTrain = childSnapshot.val().firstTrain;
 
+    var timeArrive = tFirstTrain.split(':');
+    var trainTime = moment()
+        .hours(timeArrive[0])
+        .minutes(timeArrive[1]);
+    var maxMoment = moment.max(moment(), trainTime);
+    var tMinutes;
+    var tArrival;
+
+    if(maxMoment === trainTime) {
+        tArrival = trainTime.format("hh:mm A");
+        tMinutes = trainTime.diff(moment(), "minutes");
+
+    } else {
+        var differenceTimes = moment().diff(trainTime, "minutes");
+        var tRemainder = differenceTimes % tFrequency;
+        tMinutes = tFrequency - tRemainder;
+
+        tArrival = moment()
+            .add(tMinutes, "m")
+            .format("hh:mm A");
+    }
+    console.log("tMinutes", tMinutes);
+    console.log("tArrival", tArrival);
+
+    $("#train-schedule > tbody").append(
+        $("<tr>").append(
+            $("<td>").text(tName),
+            $("<td>").text(tDestination),
+            $("<td>").text(tFrequency),
+            $("<td>").text(tArrival),
+            $("<td>").text(tMinutes),
+        )
+    );
 
 });
