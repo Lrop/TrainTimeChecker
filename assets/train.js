@@ -11,10 +11,37 @@
   firebase.initializeApp(firebaseConfig);
 
 
-  // trainData = firebase.database();
+  var trainData = firebase.database();
 
-  $("#add-train-btn").on("click", function(event) {
-    // Prevent the default form submit behavior
-    event.preventDefault();
+  $("#button-submit").on("click", function(evnt){
+        event.preventDefault();
+
+
+
+        var trainName = $("#train-name")
+            .val()
+            .trim();
+        var destination = $("#destination")
+            .val()
+            .trim();
+        var firstTrain = $("#train-time")
+            .val()
+            .trim();
+        var frequency = $("#frequency")
+            .val()
+            .trim();
+
+
+        var newTrain = {
+            name: trainName,
+            destination: destination,
+            firstTrain: firstTrain,
+            frequency:frequency,
+        };
+
+        trainData.ref().push(newTrain);
+
+
+
   });
   
