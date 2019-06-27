@@ -47,7 +47,7 @@ var firebaseConfig = {
         console.log(newTrain.frequency);
 
 
-        alert("trian added bitch");
+        alert("Train Added to Schedule");
 
         $('#train-name-input').val("");
         $('#train-destination-input').val("");
